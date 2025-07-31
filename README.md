@@ -29,6 +29,7 @@ ORDER BY
 LIMIT 10;
 ````
 >**Insight:** Helps identify priority regions for local campaigns, giveaways, or pickup partnerships.  
+> ![Top 10 neighborhoods](https://github.com/luizzangelo/sql-analysis/blob/main/TOP_10_NEIGH.png?raw=true)
 
 ### 2. What is the total sales value per month in the last year?
 
@@ -48,6 +49,7 @@ GROUP BY DATE_PART('month', data_criacao)
 ORDER BY mes;
 ```
 >**Insight:** Reveals sales seasonality and supports planning promotions for slower months.
+> ![total sales](https://github.com/luizzangelo/sql-analysis/blob/main/SALES_LAST_YEAR.png?raw=true)
 
 ### 3. Which are the top 5 best-selling products by quantity?
 
@@ -61,6 +63,7 @@ ORDER BY qtd_vendido DESC
 LIMIT 5;
 ```
 >**Insight:** Highlights the most popular items for featured promotions and stock prioritization.
+> ![top 5 best-selling](https://github.com/luizzangelo/sql-analysis/blob/main/TOP_5_PRODUCTS.png?raw=true)
 
 ### 4. How many orders were placed by each payment method?
 
@@ -77,6 +80,7 @@ GROUP BY pagamento_nome
 ORDER BY qtd DESC;
 ```
 >**Insight:** Shows preferred payment options and informs strategic offers (e.g., Pix, boleto, credit card).
+> ![payment method](https://github.com/luizzangelo/sql-analysis/blob/main/METHOD_PAYMENT.png?raw=true)
 
 ### 5. What is the average ticket per customer?
 
@@ -98,6 +102,7 @@ GROUP BY cpf_cliente
 ORDER BY total_spent DESC;
 ```
 >**Insight:** Enables segmentation for campaigns aimed at increasing average spend and loyalty programs.
+> ![average ticket](https://github.com/luizzangelo/sql-analysis/blob/main/AVERAGE_TICKET.png?raw=true)
 
 ### 6. Which product categories generate the highest revenue?
 
@@ -120,6 +125,7 @@ ORDER BY total_revenue DESC
 LIMIT 10;
 ```
 >**Insight:** Guides inventory prioritization and targeted category promotions.
+> ![best categories](https://github.com/luizzangelo/sql-analysis/blob/main/TOP_10_CATEGORIES.png?raw=true)
 
 ### 7. What percentage of customers are repeat buyers (2+ orders)?
 
@@ -153,15 +159,16 @@ FROM repeat_customers;
 SELECT
   fv.endereco_entrega_bairro,
   dp.categoria,
-  COUNT(*) AS sales_count
+  COUNT(*) AS qtd_vendas
 FROM fato_vendas fv 
 JOIN dim_produto dp ON dp.id_produto = fv.produto_id
 WHERE pedido_situacao NOT IN ('Pedido Cancelado','Pagamento devolvido')
 GROUP BY fv.endereco_entrega_bairro, dp.categoria
 HAVING COUNT(*) > 1
-ORDER BY fv.endereco_entrega_bairro, sales_count DESC;
+ORDER BY fv.endereco_entrega_bairro, qtd_vendas DESC;
 ```
 >**Insight:** Enables geo-targeted campaigns and optimized local inventory mixes.
+> ![best categories](https://github.com/luizzangelo/sql-analysis/blob/main/MOST_CATEGORIES_SALES.png?raw=true)
 
 ### 9. What is the average ticket per product category?
 
@@ -186,6 +193,7 @@ ORDER BY avg_ticket_category DESC
 LIMIT 10;
 ```
 >**Insight:** Identifies high-value categories and opportunities for cross-sell promotions.
+> ![ticket per category](https://github.com/luizzangelo/sql-analysis/blob/main/AVERAGE_TICKET_CATEGORY.png?raw=true)
 
 ### 10. How are customers distributed by age group?
 
@@ -205,6 +213,7 @@ GROUP BY age_group
 ORDER BY customer_count DESC;
 ```
 >**Insight:** Helps tailor marketing messages to demographic segments.
+> ![ticket per product](https://github.com/luizzangelo/sql-analysis/blob/main/AGE_GROUP.png?raw=true)
 
 ### 11. What is the total sold per year/month?
 
@@ -223,7 +232,7 @@ GROUP BY year_month
 ORDER BY year_month;
 ```
 >**Insight:** Tracks sales evolution over time and identifies seasonal trends.
-
+> ![total sold](https://github.com/luizzangelo/sql-analysis/blob/main/TOTAL_SOLD_PER_YEAR.png?raw=true)
 ---
 
 ## 📌 How to Contribute
