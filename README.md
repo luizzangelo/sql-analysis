@@ -220,7 +220,7 @@ ORDER BY customer_count DESC;
 ```sql
 SELECT 
   TO_CHAR(data_criacao, 'YYYY/MM') AS year_month,
-  SUM(valor_total - valor_envio) AS total_revenue
+  SUM(valor_total - valor_envio) AS total_vendido
 FROM (
   SELECT DISTINCT pedido_numero,
     cpf_cliente, endereco_entrega_nome,
