@@ -85,24 +85,31 @@ ORDER BY qtd DESC;
 ### 5. What is the average ticket per customer?
 
 ```sql
-SELECT 
+select 
   cpf_cliente,
   MIN(endereco_entrega_nome) AS nome_cliente,
-  COUNT(*) AS qtd_pedidos,
-  SUM(valor_comprado_real) AS total_spent,
-  ROUND(SUM(valor_comprado_real) / COUNT(*), 2) AS avg_ticket_per_customer
-FROM (
-  SELECT DISTINCT pedido_numero, cpf_cliente, endereco_entrega_nome,
-         (valor_total - valor_envio) AS valor_comprado_real
-  FROM fato_vendas
-  WHERE pedido_situacao NOT IN ('Pedido Cancelado','Pagamento devolvido')
-    AND endereco_entrega_nome != 'CLIENTE WPP'
+  count(*) as qtd_pedidos,
+  sum(valor_comprado_real) as total_cliente_comprou,
+  round(sum(valor_comprado_real)/count(*),2) as ticket_medio_cliente
+from(
+  select distinct pedido_numero,
+  cpf_cliente,
+  endereco_entrega_nome,
+  (valor_total-valor_envio) as valor_comprado_real
+  from
+    fato_vendas
+  where
+	pedido_situacao not in ('Pedido Cancelado','Pagamento devolvido') and endereco_entrega_nome!='CLIENTE WPP'
+  order by
+	pedido_numero
 ) pedidos_unicos
-GROUP BY cpf_cliente
-ORDER BY total_spent DESC;
+group by
+cpf_cliente
+order by
+total_cliente_comprou desc
 ```
 >**Insight:** Enables segmentation for campaigns aimed at increasing average spend and loyalty programs.
-> ![average ticket](https://github.com/luizzangelo/sql-analysis/blob/main/AVERAGE_TICKET.png?raw=true)
+> ![average ticket](https://github.com/luizzangelo/sql-analysis/blob/main/Screenshot%202025-07-31%20at%2013.00.22.png?raw=true)
 
 ### 6. Which product categories generate the highest revenue?
 
