@@ -1,4 +1,3 @@
-````markdown
 # 📊 SQL Insights for E-commerce
 
 This repository collects SQL queries used for **real marketing and sales analyses** in an e-commerce project, aiming to deliver practical and strategic business insights. Each analysis includes the business question, the SQL query used, and a brief interpretation of the results.
@@ -7,9 +6,9 @@ This repository collects SQL queries used for **real marketing and sales analyse
 
 ## 🧱 Table Structure
 
-- **dim_cliente** : customer data (CPF, name, email, birth date, location).  
-- **dim_produto** : product catalog (ID, SKU, name, category).  
-- **fato_vendas** : transactional sales data (order, product, value, status, shipping, customer).
+**dim_cliente** : customer data (CPF, name, email, birth date, location).  
+**dim_produto** : product catalog (ID, SKU, name, category).  
+**fato_vendas** : transactional sales data (order, product, value, status, shipping, customer).
 
 ---
 
