@@ -182,7 +182,7 @@ ORDER BY fv.endereco_entrega_bairro, qtd_vendas DESC;
 ```sql
 SELECT
   categoria,
-  SUM(preco_produto) AS total_revenue,
+  SUM(preco_produto) AS total_vendido,
   COUNT(*) AS total_sales,
   ROUND(SUM(preco_produto) / COUNT(*), 2) AS avg_ticket_category
 FROM (
